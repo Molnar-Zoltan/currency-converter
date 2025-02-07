@@ -1,4 +1,4 @@
-const apiKey = import.meta.env.VITE_API_KEY;
+//const apiKey = import.meta.env.VITE_API_KEY; // "freecurrencyapi.com" API method
 
 const amountInput = document.getElementById("amountText");
 const resultText = document.getElementById("resultText");
@@ -121,7 +121,8 @@ swapButton.addEventListener("click", () => { // Swaps the values of currencies i
  
 async function requestData(baseCurrency, targetCurrency, errorMessage) { // Fetch data from the API
 
-    const requestUrl = `https://api.freecurrencyapi.com/v1/latest?apikey=${apiKey}&currencies=${targetCurrency}&base_currency=${baseCurrency}`;
+    //const requestUrl = `https://api.freecurrencyapi.com/v1/latest?apikey=${apiKey}&currencies=${targetCurrency}&base_currency=${baseCurrency}`; // Using the "freecurrencyapi.com" API method
+    const requestUrl = `https://molnar-zoltan-currency-converter.netlify.app/.netlify/functions/getData?param1=${baseCurrency}&param2=${targetCurrency}`; // Using the Netlify serverless function method
     const response = await fetch(requestUrl);
 
     if (!response.ok) {
