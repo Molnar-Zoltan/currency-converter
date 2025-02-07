@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/main.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="content">
+
+        <div class="converterContainer">
+
+            <div class="mainContainer">
+                <div class="currencyContainer">
+                    <label for="baseCurrency" class="currencyLabel">From:</label>
+                    <div class="display">
+                        <select id="baseCurrency" name="baseCurrency" class="select"></select>
+                        <input type="number" name="amountText" id="amountText" placeholder="0" value="0" min="0" class="inputs">
+                    </div>
+                </div>
+                <div class="swapContainer">
+                    <button id="swapButton">
+                        <svg class="swapIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M279.76-151.87 71.87-359.52l207.89-207.65 63.65 64.65-97.5 97.5h274.57v91H245.91l97.5 97.5-63.65 64.65Zm400.48-240.96-63.65-64.65 97.5-97.5H439.52v-91h274.57l-97.5-97.5 63.65-64.65 207.89 207.65-207.89 207.65Z"/></svg>
+                    </button>
+                   
+                </div>
+                <div class="currencyContainer">
+                    <label for="targetCurrency" class="currencyLabel">To:</label>
+                    <div class="display">
+                        <select id="targetCurrency" name="targetCurrency" class="select"></select>
+                        <input id="resultText" readonly class="inputs" value="0">
+                    </div>
+                </div>
+            </div>
+            <div class="errorContainer">
+                <p id="errorText"></p>
+            </div>
+            <div class="buttonContainer">
+                <button id="convertButton">Convert</button>
+            </div>
+
+        </div>
+
+
+
+    </div>
+    <script src="scripts/main.js"></script>
+</body>
+</html>
