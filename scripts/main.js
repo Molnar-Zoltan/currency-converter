@@ -1,4 +1,4 @@
-const apiKey = API_KEY;
+const apiKey = import.meta.env.VITE_API_KEY;
 
 const amountInput = document.getElementById("amountText");
 const resultText = document.getElementById("resultText");
@@ -21,7 +21,7 @@ const currencies = {
 };
 
 
-function createOptions() {
+function createOptions() { // Creates the option elements
 
     Object.entries(currencies).forEach(([key, value]) => {
         const optionBase = document.createElement("option");
@@ -70,7 +70,7 @@ convertButton.addEventListener("click", async () => {
         {
             if (amount > 0) {
 
-                const data = await requestData(baseCurrency, targetCurrency);
+                const data = await requestData(baseCurrency, targetCurrency, errorMessage);
 
                 //const resultCurrency = Object.keys(data.data)[0]; // Gets the currency name
                 const resultValue = Object.values(data.data)[0]; // Gets the currency amount
@@ -106,7 +106,7 @@ convertButton.addEventListener("click", async () => {
 });
 
 
-swapButton.addEventListener("click", () => {
+swapButton.addEventListener("click", () => { // Swaps the values of currencies in the select/input fields 
     const oldBaseSelectValue = baseCurrencySelect.value;
     const oldTargetSelectValue = targetCurrencySelect.value;
     const oldAmountValue = amountInput.value;
@@ -119,7 +119,7 @@ swapButton.addEventListener("click", () => {
 });
 
  
-async function requestData(baseCurrency, targetCurrency) {
+async function requestData(baseCurrency, targetCurrency, errorMessage) { // Fetch data from the API
 
     const requestUrl = `https://api.freecurrencyapi.com/v1/latest?apikey=${apiKey}&currencies=${targetCurrency}&base_currency=${baseCurrency}`;
     const response = await fetch(requestUrl);

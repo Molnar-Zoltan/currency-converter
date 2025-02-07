@@ -53,6 +53,13 @@
     --font-weight-regular: 400; 
     --font-weight-bold: 700; 
 
+
+    /* --------------- Other --------------- */
+    --converter-container-height: 15rem;
+    --display-width: 30rem;
+    --error-container-height: 5rem;
+    --swap-icon-width: 5rem;
+    
 }
 
 body {
@@ -83,7 +90,7 @@ body {
         align-items: center;
         background-color: var(--primary-shade);
 
-        min-height: 15rem;
+        min-height: var(--converter-container-height);
 
         border-radius: 0.8rem;
         padding: 1rem 2rem;
@@ -110,7 +117,7 @@ body {
                     flex-direction: column;
                     justify-content: center;
                     border-radius: 0.4rem;
-                    max-width: 30rem;
+                    max-width: var(--display-width);
 
                     & .select {
                         font-size: var(--font-size-md);
@@ -121,7 +128,7 @@ body {
                         border: none;
                         border-radius: 0.4rem;
                         padding: 0.5rem;
-                        max-width: 30rem;
+                        max-width: var(--display-max-width);
                         
     
                         & .optionList {
@@ -195,7 +202,7 @@ body {
 
 
                     & .swapIcon {
-                        width: 5rem;
+                        width: var(--swap-icon-width);
                         fill: hsl(216, 12%, 92%);
                     }
 
@@ -212,7 +219,7 @@ body {
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 5rem;
+            min-height: var(--error-container-height);
             width: 100%;
             & #errorText {
                 color: var(--numbers-shade);
