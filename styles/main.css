@@ -99,6 +99,10 @@ body {
 
             display: flex;
 
+            @media (max-width: 780px) { 
+                flex-direction: column; /* Improves responsiveness for mobile */ 
+            }
+
             & .currencyContainer {
                 display: flex;
                 flex-direction: column;
@@ -192,6 +196,12 @@ body {
 
                     background: none;
                     border: none;
+
+
+                    @media (max-width: 780px) { /* Adjust the position of the swap button on mobile */ 
+                        margin-bottom: -1.2rem;
+                        padding-top: 1.2rem;
+                    }
 
                     &:active,
                     &:hover {
