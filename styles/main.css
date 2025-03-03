@@ -251,13 +251,19 @@ body {
 
 
             & #convertButton {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
                 font-weight: var(--font-weight-bold);
                 font-size: var(--font-size-md);
-                color: var(--text-color);
                 background-color: var(--convert-button-base);
 
+                min-height: 4.9rem;
+                min-width: 8rem;                
+                
 
-                padding: 1rem;
+                /* padding: 1rem; */
                 border: none;
                 border-radius: 0.5rem;
                 margin-bottom: 0.5rem;
@@ -267,9 +273,31 @@ body {
                     background-color: var(--convert-button-shade);
                 }
 
+                & .convertText {
+                    color: var(--text-color);
+                }
+
+                & .loading {
+                    display: none;
+                    & svg {
+                        width: 2.5rem;
+                        fill: var(--text-color);
+                        animation: spin 0.6s linear infinite;
+                    }
+
+
+                }
+
+
+
             }
         }
 
     }
 
+}
+
+@keyframes spin {
+    0% { transform: rotate(360deg); }
+    100% { transform: rotate(0deg); }
 }

@@ -11,6 +11,7 @@ const convertButton = document.getElementById("convertButton");
 const swapButton = document.getElementById("swapButton");
 
 const maxCharacterLength = 16;
+let isFetching = false;
 
 const currencies = {
     "EUR": "Euro (EUR)", 
@@ -57,43 +58,45 @@ createOptions();
 
 convertButton.addEventListener("click", async () => {
 
+    if (isFetching) return;
     const errorMessage = "Error: Request failed.";
 
     try {
-
         const baseCurrency = baseCurrencySelect.value;
         const targetCurrency = targetCurrencySelect.value;
         const amount = amountInput.value;
 
 
-        if (baseCurrency != targetCurrency)
-        {
-            if (amount > 0) {
-
-                const data = await requestData(baseCurrency, targetCurrency, errorMessage);
-
-                //const resultCurrency = Object.keys(data.data)[0]; // Gets the currency name
-                const resultValue = Object.values(data.data)[0]; // Gets the currency amount
-        
-                let result = calculateCurrency(amount, resultValue);
-                result = result >= 1 ? Number(result).toFixed(4) : result;
-            
-
-                //displayResult(`${result} ${resultCurrency}`);
-                displayResult(result);
-
-                if (errorText.textContent != "") {
-                    errorText.textContent = "";
-                }
-    
-            }
-            else {
-                displayError("The amount must be higher than 0.");
-            }
-        }
-        else {
+        if (baseCurrency === targetCurrency) {
             displayError("You can't convert to the same currency!");
+            return;
         }
+
+        if (amount <= 0) {
+            displayError("The amount must be higher than 0.");
+            return;
+        }
+        
+        isFetching = true;
+        convertButton.firstElementChild.style.display = "none";
+        convertButton.lastElementChild.style.display = "block";
+
+        const data = await requestData(baseCurrency, targetCurrency, errorMessage);
+
+        //const resultCurrency = Object.keys(data.data)[0]; // Gets the currency name
+        const resultValue = Object.values(data.data)[0]; // Gets the currency amount
+
+        let result = calculateCurrency(amount, resultValue);
+        result = result >= 1 ? Number(result).toFixed(4) : result;
+    
+
+        //displayResult(`${result} ${resultCurrency}`);
+        displayResult(result);
+
+        if (errorText.textContent != "") {
+            errorText.textContent = "";
+        }
+
 
 
     }
@@ -102,11 +105,17 @@ convertButton.addEventListener("click", async () => {
         displayError(errorMessage);
     }
 
+    isFetching = false;
+    convertButton.firstElementChild.style.display = "block";
+    convertButton.lastElementChild.style.display = "none";
+ 
 
 });
 
 
 swapButton.addEventListener("click", () => { // Swaps the values of currencies in the select/input fields 
+    if (isFetching) return;
+
     const oldBaseSelectValue = baseCurrencySelect.value;
     const oldTargetSelectValue = targetCurrencySelect.value;
     const oldAmountValue = amountInput.value;
